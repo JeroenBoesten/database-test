@@ -13,6 +13,8 @@ jobs:
         image: mysql:5.7
         env:
           MYSQL_ROOT_PASSWORD: root
+          MYSQL_USER: testing
+          MYSQL_PASSWORD: testing
           MYSQL_DATABASE: laravel_tags
         ports:
           - 3306
@@ -24,7 +26,7 @@ jobs:
           ref: ${{ github.head_ref }}
 
       - name: connect
-        run: mysql -h 127.0.0.1 --port ${{ job.services.mysql.ports[3306] }} -u root -p=root
+        run: mysql -h 127.0.0.1 --port ${{ job.services.mysql.ports[3306] }} -u testing -p=testing
 
       - name: Build App Image
         run: docker build --file ./devops/Dockerfile --build-arg MYSQL_PORT=${{ job.services.mysql.ports[3306] }} --tag jeroenboesten/database-test:foobar .
