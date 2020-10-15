@@ -7,8 +7,10 @@ RUN apt-get update \
 # Install php extensions
 RUN docker-php-ext-install pdo_mysql
 
-RUN wait-for-it mysql:3306
-RUN mysql -h mysql --port 3306 -u root -p
+#RUN wait-for-it mysql:3306
+#RUN mysql -h mysql --port 3306 -u root -p
+
+RUN ping 172.17.0.1 -c 4
 
 # Change the user to www-data
 USER www-data

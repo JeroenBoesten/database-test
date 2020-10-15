@@ -23,8 +23,8 @@ jobs:
         with:
           ref: ${{ github.head_ref }}
 
-      - name: connect
-        run: mysql -h 127.0.0.1 --port 3306 -u root -p
+#      - name: connect
+#        run: mysql -h 127.0.0.1 --port 3306 -u root -p
 
       - name: Build App Image
         run: docker build --file ./devops/Dockerfile --tag jeroenboesten/database-test:foobar .
