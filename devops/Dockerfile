@@ -2,23 +2,10 @@
 FROM php:7.4-fpm
 
 RUN apt-get update \
-        && apt-get -y install wait-for-it git zip jpegoptim optipng pngquant gifsicle ffmpeg default-mysql-client libmcrypt-dev libonig-dev libmagickwand-dev\
-        && apt-get -y install nano ##TEMP
+        && apt-get -y install wait-for-it git zip default-mysql-client
 
 # Install php extensions
-RUN  pecl install mcrypt \
-        && docker-php-ext-enable mcrypt \
-        && pecl install redis \
-        && docker-php-ext-enable redis \
-        && docker-php-ext-install pdo_mysql \
-        && docker-php-ext-install pcntl \
-        && docker-php-ext-install mbstring \
-        && docker-php-ext-configure gd --with-jpeg=/usr/lib --with-freetype=/usr/include/freetype2 \
-        && docker-php-ext-install gd \
-        && docker-php-ext-install json \
-        && docker-php-ext-install fileinfo \
-        && pecl install pcov \
-        && docker-php-ext-enable pcov
+RUN docker-php-ext-install pdo_mysql
 
 RUN wait-for-it mysql:3306
 RUN mysql -h mysql --port 3306 -u root -p
