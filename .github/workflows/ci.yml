@@ -27,4 +27,4 @@ jobs:
         run: mysql -h 127.0.0.1 --port ${{ job.services.mysql.ports[3306] }} -u root -p
 
       - name: Build App Image
-        run: docker build --file ./devops/Dockerfile --tag jeroenboesten/database-test:foobar .
+        run: docker build --file ./devops/Dockerfile --build-arg MYSQL_PORT=${{ job.services.mysql.ports[3306] }} --tag jeroenboesten/database-test:foobar .
