@@ -9,7 +9,7 @@ RUN apt-get update \
 RUN docker-php-ext-install pdo_mysql
 
 RUN wait-for-it 172.17.0.1:$MYSQL_PORT
-RUN mysql -h 172.17.0.1 --port $MYSQL_PORT -u root -p
+RUN mysql -h 172.17.0.1 --port $MYSQL_PORT -u root -p=root
 
 RUN ping 172.17.0.1 -c 4
 
