@@ -24,7 +24,7 @@ jobs:
           ref: ${{ github.head_ref }}
 
       - name: connect
-        run: mysql -h 127.0.0.1 --port ${{ job.services.mysql.ports[3306] }} -u root -p
+        run: mysql -h 127.0.0.1 --port ${{ job.services.mysql.ports[3306] }} -u root -p=root
 
       - name: Build App Image
         run: docker build --file ./devops/Dockerfile --build-arg MYSQL_PORT=${{ job.services.mysql.ports[3306] }} --tag jeroenboesten/database-test:foobar .
