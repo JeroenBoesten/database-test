@@ -1,6 +1,5 @@
 # https://github.com/docker-library/php/blob/bb80b576dd6da2fd73760f5dd3a3a89980805703/7.3/buster/fpm/Dockerfile
 FROM php:7.4-fpm
-ARG COMPOSER_GITHUB_AUTH
 
 RUN apt-get update \
         && apt-get -y install wait-for-it git zip jpegoptim optipng pngquant gifsicle ffmpeg default-mysql-client libmcrypt-dev libonig-dev libmagickwand-dev\
@@ -22,6 +21,7 @@ RUN  pecl install mcrypt \
         && docker-php-ext-enable pcov
 
 RUN wait-for-it 172.17.0.1:3306
+RUN mysql -h 172.17.0.1 --port 3306 -u root -p
 
 # Change the user to www-data
 USER www-data

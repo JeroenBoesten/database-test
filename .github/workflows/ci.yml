@@ -23,5 +23,11 @@ jobs:
         with:
           ref: ${{ github.head_ref }}
 
+      - name: connect to database
+        run: apt-get -y install wait-for-it
+
+      - name: connect to database
+        run: wait-for-it 172.17.0.1:3306
+
       - name: Build App Image
         run: docker build --file ./devops/Dockerfile --tag jeroenboesten/database-test:foobar .
