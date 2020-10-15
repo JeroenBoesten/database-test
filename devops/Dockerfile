@@ -20,8 +20,8 @@ RUN  pecl install mcrypt \
         && pecl install pcov \
         && docker-php-ext-enable pcov
 
-RUN wait-for-it 172.17.0.1:3306
-RUN mysql -h 172.17.0.1 --port 3306 -u root -p
+RUN wait-for-it mysql:3306
+RUN mysql -h mysql --port 3306 -u root -p
 
 # Change the user to www-data
 USER www-data
